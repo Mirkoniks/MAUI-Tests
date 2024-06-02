@@ -10,8 +10,16 @@ namespace UI
         {
             InitializeComponent();
 
-            MainContent.Content = new SystemLogin();
+            //MainContent.Content = new SystemLogin();
 
+            //this.Close();
+
+            //SystemLogin systemLogin = new SystemLogin();
+
+
+            //systemLogin.Show();
+
+            //Close();
         }
     }
 }

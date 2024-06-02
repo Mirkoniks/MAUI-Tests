@@ -73,6 +73,10 @@ namespace Welcome.Model
             byte[] Key = Encoding.UTF8.GetBytes("asdfghyuiopytret");
             byte[] vector = new byte[16];
 
+            if(cipherText == null)
+            {
+                cipherText = "";
+            }
 
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
 

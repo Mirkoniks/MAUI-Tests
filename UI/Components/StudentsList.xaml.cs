@@ -8,7 +8,7 @@ using Welcome.Others;
 
 namespace UI.Components
 {
-    public partial class StudentsList : UserControl
+    public partial class StudentsList : Window
     {
         public UserRoleEnum Role { get; set; }
         public string Name { get; set; }
@@ -82,7 +82,7 @@ namespace UI.Components
         {
             SystemLogin studentsList = new SystemLogin();
 
-            Window parentWindow = Window.GetWindow(this);
+            Window parentWindow = this;
 
             if (parentWindow != null)
             {

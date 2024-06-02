@@ -17,7 +17,7 @@
 
     <Grid x:Name="MainGrid">
 
-        <ContentControl x:Name="MainContent"/>
+        <!--<ContentControl x:Name="MainContent"/>-->
 
     </Grid>
 </Window>

@@ -566,3 +566,57 @@
  User: John Doe has succssesfully loged in!
 ~ LOGGER ~
 
+~ LOGGER ~
+05-06-2024 20:24:06
+[Information] [Login]
+ User: John Doe has succssesfully loged in!
+~ LOGGER ~
+
+~ LOGGER ~
+05-06-2024 21:56:18
+[Information] [Login]
+ User: John Doe has succssesfully loged in!
+~ LOGGER ~
+
+~ LOGGER ~
+08-06-2024 17:55:09
+[Information] [Login]
+ User: John Doe has succssesfully loged in!
+~ LOGGER ~
+
+~ LOGGER ~
+09-06-2024 08:18:05
+[Information] [Login]
+ User: John Doe has succssesfully loged in!
+~ LOGGER ~
+
+~ LOGGER ~
+09-06-2024 08:18:56
+[Information] [Login]
+ User: Hero has succssesfully loged in!
+~ LOGGER ~
+
+~ LOGGER ~
+09-06-2024 08:19:18
+[Information] [Login]
+ User: John Doe has succssesfully loged in!
+~ LOGGER ~
+
+~ LOGGER ~
+09-06-2024 08:36:13
+[Information] [Login]
+ username was not found!
+~ LOGGER ~
+
+~ LOGGER ~
+09-06-2024 08:36:22
+[Information] [Login]
+ username was not found!
+~ LOGGER ~
+
+~ LOGGER ~
+09-06-2024 08:41:20
+[Information] [Login]
+ User: John Doe has succssesfully loged in!
+~ LOGGER ~
+

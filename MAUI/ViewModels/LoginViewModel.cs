@@ -29,6 +29,8 @@ namespace MAUI.ViewModels
         public LoginViewModel()
         {
             _user = new DatabaseUser();
+            Name = string.Empty;
+            Password = string.Empty;
         }
 
 
@@ -36,20 +38,21 @@ namespace MAUI.ViewModels
         private async Task Login() 
         {
 
-            await Shell.Current.GoToAsync("//Logs");
-
-            //bool result = _user.LogUser(Name, Password);
-            //if (!result)
-            //{
-            //    await Application.Current.MainPage.DisplayAlert("Authentication error", "Wrong password or username", "Back");
-            //    Delegates.LogLoginError(Name);
+            bool result = _user.LogUser(Name, Password);
+            if (!result)
+            {
+                await Application.Current.MainPage.DisplayAlert("Authentication error", "Wrong password or username", "Back");
+                Delegates.LogLoginError(Name);
 
 
-            //    return;
-            //}
+            }
+            else 
+            {        
+                Delegates.LogLoginSuccess(Name);
+                
+                await Shell.Current.GoToAsync($"//StudentsList");
 
-            //Delegates.LogLoginSuccess(Name);
-
+            }
         }
     }
 }

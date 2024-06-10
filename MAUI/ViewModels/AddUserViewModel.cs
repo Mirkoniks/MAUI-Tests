@@ -14,6 +14,7 @@ using Welcome.Others;
 
 namespace MAUI.ViewModels
 {
+    [QueryProperty(nameof(LoggedUserRole), "role")]
     public partial class AddUserViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -43,14 +44,21 @@ namespace MAUI.ViewModels
         [ObservableProperty]
         private ObservableCollection<AddUserViewModel> _users;
 
-        private DatabaseUser _user;
+        [ObservableProperty]
+        private bool _isMoreButtonVisible = false;
 
+        [ObservableProperty]
+        private string _loggedUserRole;
+
+        private DatabaseUser _user;
 
 
         public AddUserViewModel()
         {
             _user = new DatabaseUser();
             _users = new ObservableCollection<AddUserViewModel>();
+
+            //CheckCondition();
 
         }
 
@@ -110,6 +118,8 @@ namespace MAUI.ViewModels
 
                 newUsers.Add(vm);
             }
+
+            if(newUsers.Count >0) IsMoreButtonVisible = true;
 
             Users = newUsers;
         }

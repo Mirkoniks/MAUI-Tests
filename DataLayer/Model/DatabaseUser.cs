@@ -147,5 +147,21 @@ namespace DataLayer.Model
                 return messages;
             }
         }
+
+        public UserRoleEnum GetRoleByName(string name) 
+        {
+            using (var context = new DatabaseContext()) 
+            {
+                var res = context.Users.Where(u => u.Name == name).FirstOrDefault();
+
+
+                if (res != null) 
+                {
+                    return res.Role;
+                }
+
+                return UserRoleEnum.ANONYMUS;
+            }
+        }
     }
 }

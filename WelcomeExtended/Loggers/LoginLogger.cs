@@ -30,7 +30,12 @@ namespace WelcomeExtended.Loggers
         {
             var message = formatter(state, exception);
 
-            string file = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "LoginLog.txt");
+            string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "LoginLog.txt");
+
+            // Read the file as one string. 
+            string text = System.IO.File.ReadAllText(startupPath);
+
+            string file = FindSolutionFolderPath();
 
             using (StreamWriter writer = File.AppendText(file))
             {
@@ -45,6 +50,18 @@ namespace WelcomeExtended.Loggers
                 writer.WriteLine("~ LOGGER ~");
                 writer.WriteLine("");
             }
+        }
+
+        public string FindSolutionFolderPath()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            while (!string.IsNullOrEmpty(currentDirectory) && !Directory.GetFiles(currentDirectory, "*.sln").Any())
+            {
+                currentDirectory = Directory.GetParent(currentDirectory)?.FullName;
+            }
+
+            return currentDirectory ?? string.Empty;
         }
     }
 }

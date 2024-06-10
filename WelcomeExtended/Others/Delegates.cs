@@ -16,7 +16,7 @@ namespace WelcomeExtended.Others
 
         public static readonly ILogger fileLogger = LoggerHelper.GetFileLogger("File");
 
-        public static readonly ILogger loginLogger = LoggerHelper.GetLoginLogger("Login");
+        public static readonly ILogger loginLogger = LoggerHelper.GetFileLogger("Login");
 
         public static readonly ILogger databaseLogger = LoggerHelper.GetDatabaseLogger("Database");
 

@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WelcomeExtended.Loggers
 {
@@ -15,34 +11,55 @@ namespace WelcomeExtended.Loggers
 
         public FileLogger(string name)
         {
-            _name = name;
+            _name = name ?? throw new ArgumentNullException(nameof(name));
         }
+
         public IDisposable? BeginScope<TState>(TState state) where TState : notnull
         {
-            throw new NotImplementedException();
+            // Scope is not implemented for simplicity
+            return null;
         }
 
         public bool IsEnabled(LogLevel logLevel)
         {
-            throw new NotImplementedException();
+            // You can implement more complex logic here to enable/disable logging based on logLevel
+            return true;
         }
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
-            string file = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "ErrosLog.txt");
+            if (state == null) throw new ArgumentNullException(nameof(state));
+            if (formatter == null) throw new ArgumentNullException(nameof(formatter));
 
-            using (StreamWriter writer = File.AppendText(file))
+            try
             {
+                string file = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "ErrorsLog.txt");
 
-                writer.WriteLine("~ LOGGER ~");
-                writer.WriteLine(DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss"));
-                var messageToBeLogger = new StringBuilder();
-                messageToBeLogger.Append($"[{logLevel}]");
-                messageToBeLogger.AppendFormat(" [{0}]", _name);
-                writer.WriteLine(messageToBeLogger);
-                writer.WriteLine($" {formatter(state, exception)}");
-                writer.WriteLine("~ LOGGER ~");
-                writer.WriteLine("");
+                using (StreamWriter writer = File.AppendText(file))
+                {
+                    writer.WriteLine("~ LOGGER ~");
+                    writer.WriteLine(DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss"));
+
+                    var messageToBeLogged = new StringBuilder();
+                    messageToBeLogged.Append($"[{logLevel}]");
+                    messageToBeLogged.AppendFormat(" [{0}]", _name);
+
+                    writer.WriteLine(messageToBeLogged);
+                    writer.WriteLine($" {formatter(state, exception)}");
+
+                    if (exception != null)
+                    {
+                        writer.WriteLine($"Exception: {exception}");
+                    }
+
+                    writer.WriteLine("~ LOGGER ~");
+                    writer.WriteLine("");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle logging exception (e.g., file IO issues)
+                Console.Error.WriteLine($"Logging failed: {ex}");
             }
         }
     }
